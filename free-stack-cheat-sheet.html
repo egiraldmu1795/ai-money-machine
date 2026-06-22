@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Free: The Local-AI Stack Cheat Sheet — The AI Money Machine</title>
+<meta name="description" content="Free one-page cheat sheet: which free local AI model to run for which job, on which hardware. The lean stack that costs $0/month in API bills." />
+<meta name="robots" content="index,follow" />
+<style>
+  :root{--bg:#0a0e14;--panel:#121826;--ink:#e8edf6;--muted:#9aa7bd;--brand:#4ade80;--brand2:#22d3ee;--line:#1f2937}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+  .hero{padding:72px 0 40px;background:radial-gradient(700px 360px at 50% -10%,rgba(34,211,238,.14),transparent 60%);text-align:center}
+  h1{font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-.02em;margin:.2em 0}
+  .grad{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--brand);font-weight:700}
+  .sub{color:var(--muted);font-size:18px;max-width:560px;margin:10px auto 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;margin:30px 0}
+  ul.clean{list-style:none;padding:0;margin:14px 0}
+  ul.clean li{padding:7px 0 7px 28px;position:relative;color:var(--muted)}
+  ul.clean li::before{content:"";position:absolute;left:0;top:13px;width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,var(--brand),var(--brand2))}
+  form{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  input[type=email]{flex:1;min-width:220px;background:#0f1420;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:14px 18px;font-size:16px}
+  button{background:linear-gradient(90deg,var(--brand),var(--brand2));color:#04121a;font-weight:800;border:0;border-radius:999px;padding:14px 26px;font-size:16px;cursor:pointer}
+  .fine{color:var(--muted);font-size:13px;margin-top:10px}
+  a{color:var(--brand2);text-decoration:none}
+  .banner{background:#1a1206;border:1px solid #3a2a08;color:#fbbf24;font-size:13px;text-align:center;padding:8px 14px}
+  footer{padding:36px 0;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<div class="banner" id="draftBanner">DRAFT / NOT LIVE — connect your email tool before collecting addresses. See README.md.</div>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Free download</div>
+    <h1>The <span class="grad">Local-AI Stack</span> Cheat Sheet</h1>
+    <p class="sub">One page. Which free local model to run for which job, on which hardware — the lean stack that costs <strong style="color:var(--ink)">$0/month</strong> in API bills.</p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="card">
+    <strong>Inside the cheat sheet:</strong>
+    <ul class="clean">
+      <li>Reasoning vs drafting vs embeddings — the right local model for each</li>
+      <li>Rough VRAM/hardware guide for 3B → 32B models</li>
+      <li>The "premium tokens for reasoning, free models for grunt work" routing rule</li>
+      <li>Copy-paste install + model-pull commands to be running in 10 minutes</li>
+    </ul>
+    <!-- Esteban: point this form at your email tool (ConvertKit/MailerLite/Beehiiv/Gumroad email). -->
+    <form id="optin" action="" method="post">
+      <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address" />
+      <button type="submit">Send me the cheat sheet →</button>
+    </form>
+    <p class="fine">No spam. Unsubscribe anytime. You'll also hear when <a href="index.html">The AI Money Machine</a> course opens.</p>
+  </div>
+  <p style="text-align:center"><a href="index.html">← Back to the course</a></p>
+</main>
+<footer><div class="wrap">© <span id="yr">2026</span> The AI Money Machine. Educational. Not financial advice.</div></footer>
+<script>
+  // Esteban: set FORM_ACTION to your email-tool form endpoint, then set DRAFT=false.
+  const FORM_ACTION = "";
+  const DRAFT = true;
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  if (!DRAFT) { const b=document.getElementById("draftBanner"); if(b) b.remove(); }
+  const f = document.getElementById("optin");
+  if (FORM_ACTION) { f.action = FORM_ACTION; }
+  else {
+    f.addEventListener("submit", function(e){ e.preventDefault(); alert("Email capture isn't connected yet. (Set FORM_ACTION in this file — see README.md.)"); });
+  }
+</script>
+</body>
+</html>

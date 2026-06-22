@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The AI Money Machine — Build a Self-Running AI Organization on Your Own PC</title>
+<meta name="description" content="Step-by-step build for a self-running AI organization: a paper-trading hedge-fund committee, a content engine, and a self-healing back-office — on consumer hardware with free local models." />
+<link rel="canonical" href="https://egiraldmu1795.github.io/ai-money-machine/" />
+<!-- Open Graph -->
+<meta property="og:title" content="The AI Money Machine" />
+<meta property="og:description" content="I built an AI that runs my money and businesses on a $0/month home PC. Here's how to build your own." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://egiraldmu1795.github.io/ai-money-machine/og.png" />
+<meta property="og:url" content="https://egiraldmu1795.github.io/ai-money-machine/" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The AI Money Machine" />
+<meta name="twitter:description" content="Build a self-running, local-first AI organization on consumer hardware with free models." />
+<meta name="twitter:image" content="https://egiraldmu1795.github.io/ai-money-machine/og.png" />
+<!-- Structured data: Course/Product (SEO + AI answer surfaces). Esteban: replace domain + price/availability at publish. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "The AI Money Machine",
+  "description": "A step-by-step course to build a self-running, local-first AI organization — a paper-trading hedge-fund committee, a content engine, and a self-healing back-office — on consumer hardware with free local models.",
+  "provider": { "@type": "Organization", "name": "The AI Money Machine" },
+  "offers": {
+    "@type": "Offer",
+    "category": "Educational",
+    "price": "149.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/PreOrder",
+    "url": "https://egiraldmu1795.github.io/ai-money-machine/"
+  },
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "online",
+    "courseWorkload": "PT8H"
+  },
+  "disclaimer": "Educational only. Not financial advice. No income guarantees. Trading is paper-first; going live is a manual decision made at the student's own risk."
+}
+</script>
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#121826; --panel2:#0f1420; --ink:#e8edf6; --muted:#9aa7bd;
+    --brand:#4ade80; --brand2:#22d3ee; --line:#1f2937; --warn:#fbbf24; --radius:16px;
+    --max:980px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+  a{color:var(--brand2);text-decoration:none}
+  h1,h2,h3{line-height:1.2;letter-spacing:-.02em;margin:0 0 .5em}
+  h1{font-size:clamp(30px,5vw,52px);font-weight:800}
+  h2{font-size:clamp(24px,3.4vw,34px);font-weight:750;margin-top:0}
+  .sub{font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:760px}
+  .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--brand);font-weight:700}
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  .hero{padding:84px 0 70px;background:
+     radial-gradient(900px 420px at 80% -10%,rgba(34,211,238,.13),transparent 60%),
+     radial-gradient(700px 360px at 0% 0%,rgba(74,222,128,.12),transparent 55%)}
+  .grad{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cta{display:inline-block;background:linear-gradient(90deg,var(--brand),var(--brand2));color:#04121a;
+    font-weight:800;padding:16px 30px;border-radius:999px;font-size:18px;margin:10px 0;border:0;cursor:pointer;
+    box-shadow:0 8px 30px rgba(34,211,238,.25);transition:transform .12s ease}
+  .cta:hover{transform:translateY(-2px)}
+  .cta.small{padding:12px 22px;font-size:16px}
+  .price-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:6px 0 14px}
+  .price{font-size:42px;font-weight:800}
+  .anchor{color:var(--muted);text-decoration:line-through;font-size:22px}
+  .pill{display:inline-block;background:var(--panel);border:1px solid var(--line);color:var(--muted);
+    padding:5px 12px;border-radius:999px;font-size:13px;margin:4px 6px 4px 0}
+  .grid{display:grid;gap:16px}
+  .cols-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card h3{margin:0 0 6px;font-size:18px}
+  .card .n{font-size:13px;color:var(--brand);font-weight:700;letter-spacing:.08em}
+  .muted{color:var(--muted)}
+  ul.clean{list-style:none;padding:0;margin:0}
+  ul.clean li{padding:8px 0 8px 30px;position:relative}
+  ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:14px;height:14px;border-radius:50%;
+    background:linear-gradient(90deg,var(--brand),var(--brand2))}
+  .two{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .disclaimer{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--warn);
+    border-radius:10px;padding:14px 18px;color:var(--muted);font-size:14px}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px 18px;margin:10px 0}
+  details summary{cursor:pointer;font-weight:650;padding:14px 0;list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details[open] summary{color:var(--brand)}
+  footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center}
+  .center{text-align:center}
+  .banner{background:#1a1206;border:1px solid #3a2a08;color:var(--warn);font-size:13px;text-align:center;
+    padding:8px 14px}
+</style>
+</head>
+<body>
+<!-- Esteban: this banner shows until payment is wired. Remove it once BUY_URL is set + you approve publish. -->
+<div class="banner" id="draftBanner">DRAFT / NOT LIVE — payment is not connected and nothing is for sale yet. See storefront/README.md.</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Build a machine you own</div>
+    <h1>I built an AI that runs my money and my businesses on a <span class="grad">$0/month home PC.</span><br/>Here's how to build your own.</h1>
+    <p class="sub">A step-by-step build for a self-running AI organization: a paper-trading hedge-fund <em>committee</em> that deliberates, a content engine that feeds an audience, and a back-office that heals itself — all on consumer hardware, with free local models. No $200/month API bills. No 200GB download. No code-wizardry required.</p>
+    <p><button class="cta" data-buy>Get The AI Money Machine →</button></p>
+    <div>
+      <span class="pill">Lifetime access</span>
+      <span class="pill">Free / local model stack</span>
+      <span class="pill">8 modules + build artifacts</span>
+      <span class="pill">14-day guarantee</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap two">
+    <div>
+      <h2>Prompts aren't a business.</h2>
+      <p class="muted">You've watched the "make money with AI" videos. You've copied the prompts. And you're still trading hours for dollars. Here's the uncomfortable truth: a wrapper around someone else's API isn't an asset. The day they change the model or raise the price, you're back to nothing.</p>
+      <p class="muted">What actually compounds is a <strong style="color:var(--ink)">machine you own</strong> — one that remembers, improves itself, and works while you sleep.</p>
+    </div>
+    <div>
+      <h2>So I'll show you the real one.</h2>
+      <p class="muted">Most "AI money" courses sell the dream and a folder of prompts. This one shows you the <strong style="color:var(--ink)">actual system I run</strong> — the same departments, memory backbone, and trading committee that runs my own money and businesses on the PC in my home office.</p>
+      <p class="muted">I'm an insurance adjuster who also runs a pressure-washing service. Not a Silicon Valley engineer. If I built this, the method is teachable — and it runs on <strong style="color:var(--ink)">free local models</strong> on hardware you already own.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The one principle</div>
+    <h2>The AI proposes. A human presses go.</h2>
+    <p class="sub">My system paper-trades and drafts — but it <strong style="color:var(--ink)">never moves real money or publishes anything without me pressing the button.</strong> You'll build that exact human gate. It's the difference between a tool that makes you money and a headline about someone who let a bot drain their account. We do this the honest, safe way.</p>
+    <div class="disclaimer" style="margin-top:18px">Educational only — not financial advice. The trading system is paper-first; trading involves risk of loss. Going live with real money is a manual decision you make at your own risk. No income is guaranteed.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">What you'll build</div>
+    <h2>The machine, module by module.</h2>
+    <p class="sub">By the end you won't have notes — you'll have a running AI organization. Each module ships a downloadable build artifact, so you build it as you learn.</p>
+    <div class="grid cols-2" style="margin-top:24px">
+      <div class="card"><div class="n">MODULE 0</div><h3>The Honest Promise</h3><p class="muted">What this is, what it isn't, and the money gate that protects you.</p></div>
+      <div class="card"><div class="n">MODULE 1</div><h3>The Mental Model</h3><p class="muted">Stop thinking "chatbot." Start thinking "a company that runs itself."</p></div>
+      <div class="card"><div class="n">MODULE 2</div><h3>Your Local Stack</h3><p class="muted">Free/local models on your own PC. $0 in API bills, no 200GB.</p></div>
+      <div class="card"><div class="n">MODULE 3</div><h3>The Memory Backbone</h3><p class="muted">Give your AI a memory so it compounds instead of forgetting.</p></div>
+      <div class="card"><div class="n">MODULE 4</div><h3>Agents &amp; Skills</h3><p class="muted">Give the machine hands: tools, capabilities, and guardrails.</p></div>
+      <div class="card"><div class="n">MODULE 5</div><h3>The Trading Desk (paper-first)</h3><p class="muted">A committee that argues a thesis and runs a paper portfolio — with a human go-live gate.</p></div>
+      <div class="card"><div class="n">MODULE 6</div><h3>The Content &amp; Business Engine</h3><p class="muted">One funnel: research → script → produce → clip → publish → monetize.</p></div>
+      <div class="card"><div class="n">MODULE 7</div><h3>The Self-Healing Back-Office</h3><p class="muted">Watchdogs, self-rebuild, red-teaming. It runs itself.</p></div>
+      <div class="card"><div class="n">MODULE 8</div><h3>Ship It Responsibly</h3><p class="muted">What to monetize first, the gates, and your 30/60/90 roadmap.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap two">
+    <div>
+      <h2>Who it's for</h2>
+      <ul class="clean">
+        <li>You're technical-curious — you can install software and follow steps.</li>
+        <li>You feel the AI FOMO and want an owned system, not another subscription.</li>
+        <li>You want automated income and a way out of the rat race — built honestly.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Who it's <em>not</em> for</h2>
+      <ul class="clean">
+        <li>You want a turnkey bot that trades real money unattended. I don't sell that — and you shouldn't buy it from anyone.</li>
+        <li>You want passive riches with zero effort. This is a real build (not hard, but real work).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The value stack</div>
+    <h2>Bonuses included</h2>
+    <div class="grid cols-2" style="margin-top:20px">
+      <div class="card"><h3>EAB Starter Blueprint Pack</h3><p class="muted">The org-chart, the capability/skill pattern, the paper-committee scaffold, the memory module, and the self-healing "architect beat" — drop-in starters you can run.</p></div>
+      <div class="card"><h3>The Free-Stack Cheat Sheet</h3><p class="muted">Which local model for which job, on which hardware. No guessing.</p></div>
+      <div class="card"><h3>The Guardrail Templates</h3><p class="muted">The money gate, the publish gate, and the sensitive-action policy — copy-paste ready, so you're safe from day one.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap center">
+    <div class="eyebrow">Risk-free</div>
+    <h2>Build the first module with me.</h2>
+    <p class="sub" style="margin:0 auto">If you don't think the machine is real and the method is teachable, email within 14 days for a full refund. The risk is mine, not yours.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Questions</h2>
+    <details><summary>Do I need to know how to code?</summary><p class="muted">No — you need to be willing to follow steps and run commands. I'm an adjuster, not an engineer.</p></details>
+    <details><summary>Will this make me money?</summary><p class="muted">It builds the machine and teaches the method. I make no income promises — anyone who does is lying to you. What you do with the machine is up to you.</p></details>
+    <details><summary>Does it trade my real money automatically?</summary><p class="muted">No. It's paper-first, and going live is a manual human decision. That's a core principle of the course, not a limitation I'm hiding.</p></details>
+    <details><summary>What hardware do I need?</summary><p class="muted">A normal modern PC. The whole point is consumer hardware and free local models — no cloud bills, no giant downloads.</p></details>
+    <details><summary>Will this be outdated next month?</summary><p class="muted">The tools change; the architecture doesn't. You're learning to own and extend a system, not memorize one vendor's button.</p></details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap center">
+    <div class="eyebrow">Get started</div>
+    <h2>The AI Money Machine</h2>
+    <div class="price-row" style="justify-content:center">
+      <span class="price grad">$149</span>
+      <span class="anchor">$299</span>
+      <span class="muted">lifetime access + all updates</span>
+    </div>
+    <p><button class="cta" data-buy>Build your AI Money Machine →</button></p>
+    <p class="muted" style="font-size:13px">Optional Starter Blueprint Pack +$39 at checkout.</p>
+    <div class="disclaimer" style="max-width:760px;margin:22px auto 0">Educational only. Not financial advice. No income guarantees. Trading involves risk of loss; the system is paper-first and going live is a manual decision made at your own risk.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="yr">2026</span> The AI Money Machine. Educational product. Not financial advice.</p>
+  </div>
+</footer>
+
+<script>
+  // ── Esteban: WIRE PAYMENT HERE ───────────────────────────────────────────────
+  // Paste your Gumroad product URL or Stripe Payment Link below, then remove the
+  // draft banner (or set DRAFT=false). Nothing charges until this is set.
+  const BUY_URL = "https://egirald.gumroad.com/l/tvjadh";  // LIVE Gumroad product (Esteban published 2026-06-15)
+  const DRAFT   = false;         // LIVE
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  if (!DRAFT) { const b = document.getElementById("draftBanner"); if (b) b.remove(); }
+
+  document.querySelectorAll("[data-buy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (BUY_URL) { window.location.href = BUY_URL; }
+      else { alert("Payment isn't connected yet. (Set BUY_URL in index.html — see storefront/README.md.)"); }
+    });
+  });
+</script>
+</body>
+</html>

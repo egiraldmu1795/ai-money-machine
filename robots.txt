@@ -1,0 +1,6 @@
+# The AI Money Machine — robots.txt
+# Esteban: replace the Sitemap domain with your real domain at publish.
+User-agent: *
+Allow: /
+
+Sitemap: https://egiraldmu1795.github.io/ai-money-machine/sitemap.xml
