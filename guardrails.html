@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBiMTIyMCIvPjxwb2x5bGluZSBwb2ludHM9IjUsMjMgMTMsMTUgMTksMTggMjcsNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjJjNTVlIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjI3IiBjeT0iNyIgcj0iMi42IiBmaWxsPSIjMjJjNTVlIi8+PC9zdmc+">
+<title>Guardrails &amp; Safety — how the machine can't quietly do something irreversible | The AI Money Machine</title>
+<meta name="description" content="The AI Money Machine runs autonomously — but it cannot move real money or publish anything on its own. A single enforced gate defaults every irreversible action to dry-run/preview and requires an explicit human approval. Here is exactly how that safety boundary works." />
+<link rel="canonical" href="https://egiraldmu1795.github.io/ai-money-machine/guardrails.html" />
+<!-- Open Graph -->
+<meta property="og:title" content="The AI Money Machine — Guardrails &amp; Safety" />
+<meta property="og:description" content="Autonomous, but safe-by-default. The money gate, the publish gate, and the sensitive-action policy: how one enforced chokepoint keeps an AI org from doing anything irreversible without a human." />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="https://egiraldmu1795.github.io/ai-money-machine/og.png" />
+<meta property="og:url" content="https://egiraldmu1795.github.io/ai-money-machine/guardrails.html" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The AI Money Machine — Guardrails &amp; Safety" />
+<meta name="twitter:description" content="It runs itself, but it can't move money or publish without you. Here is the enforced safety boundary." />
+<meta name="twitter:image" content="https://egiraldmu1795.github.io/ai-money-machine/og.png" />
+<!-- Structured data: the trust/objection FAQ. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can the AI move real money on its own?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every real-money action (live order, transfer, payout) passes through a single money gate that defaults to dry-run. Going live requires an explicit, per-run human approval token — there is no global flag you leave on. The trading system is paper-first; you decide if and when real money is ever involved, at your own risk."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it publish or post things under my name without me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Anything that goes outward — a public git push, a social or video post, an external message — passes through a publish gate that defaults to preview. A human approves before it ships, and destinations are allowlisted."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is the safety actually enforced — is it just 'remember to be careful'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is enforced in code, on the real execution path, not by discipline. Every executable action passes through one chokepoint that classifies it, defaults sensitive actions to the safe mode, fails closed on anything it can't classify, and writes an append-only audit row. There are no side doors. This follows two EAB architecture decisions: ADR-0004 (the money/safety boundary) and ADR-0003 (enforce on the runtime path, not a helper script)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this a get-rich-quick scheme?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It is educational only and not financial advice. No income or return is guaranteed or claimed. The course teaches you to build and own a safe-by-default AI system on hardware you already have; the trading components are paper-first and trading involves risk of loss."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#121826; --panel2:#0f1420; --ink:#e8edf6; --muted:#9aa7bd;
+    --brand:#4ade80; --brand2:#22d3ee; --line:#1f2937; --warn:#fbbf24; --radius:16px;
+    --max:780px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:17px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+  a{color:var(--brand2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{line-height:1.25;letter-spacing:-.02em}
+  h1{font-size:clamp(28px,5vw,44px);font-weight:800;margin:.2em 0 .3em}
+  h2{font-size:clamp(20px,3vw,26px);font-weight:750;margin:0 0 .3em}
+  p{color:#cdd6e6}
+  .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--brand);font-weight:700}
+  .grad{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero{padding:64px 0 26px;background:
+     radial-gradient(900px 420px at 80% -10%,rgba(34,211,238,.13),transparent 60%),
+     radial-gradient(700px 360px at 0% 0%,rgba(74,222,128,.12),transparent 55%)}
+  .lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted)}
+  .cta{display:inline-block;background:linear-gradient(90deg,var(--brand),var(--brand2));color:#04121a;
+    font-weight:800;padding:15px 28px;border-radius:999px;font-size:17px;margin:8px 0;border:0;cursor:pointer;
+    box-shadow:0 8px 30px rgba(34,211,238,.25);transition:transform .12s ease}
+  .cta:hover{transform:translateY(-2px);text-decoration:none}
+  .topnav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;padding:22px 0 0}
+  article{padding:18px 0 8px}
+  article strong{color:var(--ink)}
+  .mod{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin:18px 0}
+  .mod .num{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--brand)}
+  .mod h2{margin-top:6px}
+  .mod .sub{color:var(--muted);font-style:italic;margin:.2em 0 .8em}
+  ul.clean{list-style:none;padding:0;margin:8px 0}
+  ul.clean li{padding:6px 0 6px 26px;position:relative;color:#cdd6e6}
+  ul.clean li::before{content:"";position:absolute;left:0;top:13px;width:11px;height:11px;border-radius:50%;
+    background:linear-gradient(90deg,var(--brand),var(--brand2))}
+  .artifact{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+  .artifact strong{color:var(--brand2)}
+  .freepill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:#04121a;background:linear-gradient(90deg,var(--brand),var(--brand2));padding:3px 10px;border-radius:999px;margin-left:8px}
+  .disclaimer{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--warn);
+    border-radius:10px;padding:14px 18px;color:var(--muted);font-size:14px;margin:24px 0}
+  .endcap{border-top:1px solid var(--line);margin-top:32px;padding:44px 0 16px;text-align:center}
+  footer{padding:34px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--line)}
+  .faq{margin:18px 0}
+  .faq h3{font-size:18px;margin:18px 0 .2em}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="topnav">
+      <a href="./">← Course home</a>
+      <a href="start-here.html">Read Module 0 free</a>
+      <a href="curriculum.html">Full curriculum</a>
+      <a href="free-stack-cheat-sheet.html">Free cheat sheet</a>
+    </nav>
+    <p class="eyebrow" style="margin-top:30px">Guardrails &amp; safety · how it can't go rogue</p>
+    <h1>It runs itself — but it <span class="grad">can't</span> move money or publish without you</h1>
+    <p class="lead">The honest objection to any "AI money machine" is: what stops it from quietly doing something irreversible? The answer is a single safety boundary, enforced in code. Everything internal runs full-speed and autonomous. The small set of actions that move real value or go public default to off — and a human pulls the trigger.</p>
+    <p style="margin-top:14px"><a class="cta" href="https://egirald.gumroad.com/l/tvjadh">Get the full course — $149 →</a></p>
+  </div>
+</header>
+
+<article class="wrap">
+
+  <p>This page describes the exact pattern you build in the course (Modules 4–8) and get as copy-paste templates plus a runnable reference. It is grounded in two real EAB architecture decisions: <strong>ADR-0004</strong> (the standing money/safety boundary) and <strong>ADR-0003</strong> (enforce on the real runtime path, not a helper script nobody calls).</p>
+
+  <div class="mod">
+    <p class="num">The one rule</p>
+    <h2>Safe-by-default, enforced at one chokepoint</h2>
+    <p class="sub">Not "remember to be careful." A single piece of code every action passes through.</p>
+    <ul class="clean">
+      <li>Everything internal — build, backtest, paper-trade, draft content, write local files — runs full-speed and autonomous.</li>
+      <li>The guardrail exists <strong>only</strong> around actions that move real value or go public and <strong>cannot be undone</strong>.</li>
+      <li>For those, the system defaults to dry-run / preview, and a <strong>human</strong> must pull the live trigger.</li>
+      <li>One classification + one audit row per execution. <strong>Fail closed</strong> — anything it can't classify is blocked, not allowed.</li>
+    </ul>
+  </div>
+
+  <div class="mod">
+    <p class="num">Gate 1</p>
+    <h2>The Money Gate</h2>
+    <p class="sub">Before any real-money action: a live order, a transfer, a payout.</p>
+    <ul class="clean">
+      <li><strong>Dry-run is the default.</strong> The system proposes and simulates; nothing hits a broker on its own.</li>
+      <li>Going live needs an explicit, per-run, human-initiated approval token — never a global flag left on.</li>
+      <li>Amount caps: a notional ceiling above which even an approved action is refused.</li>
+      <li>The trading system is paper-first; you decide if real money is ever involved, at your own risk.</li>
+    </ul>
+  </div>
+
+  <div class="mod">
+    <p class="num">Gate 2</p>
+    <h2>The Publish Gate</h2>
+    <p class="sub">The same discipline for anything that goes outward.</p>
+    <ul class="clean">
+      <li><strong>Preview is the default.</strong> A public git push, a social/video post, an external message — all draft-first.</li>
+      <li>A human approves before it ships; destinations are allowlisted (no posting to an unknown place).</li>
+      <li>AI drafts, you approve, then it goes out — never auto-publish under your name.</li>
+    </ul>
+  </div>
+
+  <div class="mod">
+    <p class="num">Gate 3</p>
+    <h2>The Sensitive-Action Policy</h2>
+    <p class="sub">The contract the gatekeeper enforces.</p>
+    <ul class="clean">
+      <li>Classifies sensitive actions into clear classes (money, publish, secrets/PII, destructive).</li>
+      <li>Defines how each class is gated and which safe mode it defaults to.</li>
+      <li>Specifies what gets logged — an append-only audit row so every gated action is accountable.</li>
+      <li>One chokepoint, no side doors: every executable action passes through the same gate.</li>
+    </ul>
+    <p class="artifact"><strong>In the course:</strong> the three templates (money gate · publish gate · sensitive-action policy) plus <code>gatekeeper.py</code> — a self-contained, stdlib-only reference that actually runs and demonstrates the guards firing. Even with a valid token, the reference file's "live" branches are deliberately stubbed so it cannot move real money or publish anything: it's a teaching scaffold you wire to your own calls in a human-supervised deployment.</p>
+  </div>
+
+  <h3 style="margin-top:34px">Common questions</h3>
+  <div class="faq">
+    <h3>Can the AI move real money on its own?</h3>
+    <p>No. Every real-money action passes through the money gate, which defaults to dry-run. Going live requires an explicit per-run human approval — there is no flag you leave on.</p>
+    <h3>Can it publish or post under my name without me?</h3>
+    <p>No. Outward actions pass through the publish gate (preview by default); a human approves before anything ships, to allowlisted destinations only.</p>
+    <h3>Is the safety just "be careful," or is it real?</h3>
+    <p>It's enforced in code on the real execution path — classify → safe-by-default → fail closed → human approval → append-only audit. No side doors. (ADR-0004 + ADR-0003.)</p>
+    <h3>Is this a get-rich-quick scheme?</h3>
+    <p>No. Educational only, not financial advice, no income guaranteed. You build and own a safe-by-default system; the trading parts are paper-first and trading involves risk of loss.</p>
+  </div>
+
+  <div class="disclaimer">Educational only — not financial advice. These gates sit on top of your broker/exchange/platform's own controls; they don't replace them. The trading system is paper-first; trading involves risk of loss. Going live with real money is a manual decision you make at your own risk. No income is guaranteed.</div>
+
+</article>
+
+<section class="endcap">
+  <div class="wrap">
+    <p class="eyebrow">Autonomous · safe-by-default · human-gated</p>
+    <h2 style="margin:.2em 0 .3em">Build the machine — with the guardrails baked in</h2>
+    <p class="lead" style="max-width:560px;margin:0 auto 18px">Module 0 is free. The full course ships you the money gate, publish gate, and sensitive-action policy as copy-paste templates plus a runnable reference.</p>
+    <p><a class="cta" href="https://egirald.gumroad.com/l/tvjadh">Get The AI Money Machine — $149 →</a></p>
+    <p style="font-size:13px;color:var(--muted)"><a href="start-here.html">Read Module 0 free first</a> &nbsp;·&nbsp; <a href="curriculum.html">see the full curriculum</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="yr">2026</span> The AI Money Machine. Educational product. Not financial advice.</p>
+  </div>
+</footer>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
