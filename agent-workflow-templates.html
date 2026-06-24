@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBiMTIyMCIvPjxwb2x5bGluZSBwb2ludHM9IjUsMjMgMTMsMTUgMTksMTggMjcsNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjJjNTVlIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjI3IiBjeT0iNyIgcj0iMi42IiBmaWxsPSIjMjJjNTVlIi8+PC9zdmc+">
+<title>Free Agent Workflow Template: Research Fan-out + Adversarial Verify | The AI Money Machine</title>
+<meta name="description" content="A free, runnable multi-agent orchestration template: decompose a question, research each angle in parallel, then send a skeptic after every claim before it's allowed into the answer. The first of five patterns from the EAB Agent Workflow Pack." />
+<link rel="canonical" href="https://egiraldmu1795.github.io/ai-money-machine/agent-workflow-templates.html" />
+<!-- Open Graph -->
+<meta property="og:title" content="Free Agent Workflow Template: Research Fan-out + Adversarial Verify" />
+<meta property="og:description" content="A runnable multi-agent pattern: research in parallel, then refute every claim before it survives. Copy it, run it. From the EAB Agent Workflow Pack." />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="https://egiraldmu1795.github.io/ai-money-machine/og.png" />
+<meta property="og:url" content="https://egiraldmu1795.github.io/ai-money-machine/agent-workflow-templates.html" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Free Agent Workflow Template: Research Fan-out + Adversarial Verify" />
+<meta name="twitter:description" content="Research in parallel, refute every claim, keep only what survives. A free runnable multi-agent template." />
+<meta name="twitter:image" content="https://egiraldmu1795.github.io/ai-money-machine/og.png" />
+<!-- Structured data: free how-to that previews the paid course / pack. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Research Fan-out + Adversarial Verify — a multi-agent workflow template",
+  "description": "A free, runnable multi-agent orchestration pattern: decompose a question into angles, research each in parallel, then refute every claim with an independent skeptic before it enters the answer.",
+  "isAccessibleForFree": true,
+  "inLanguage": "en",
+  "author": { "@type": "Organization", "name": "The AI Money Machine" },
+  "publisher": { "@type": "Organization", "name": "The AI Money Machine" }
+}
+</script>
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#121826; --panel2:#0f1420; --ink:#e8edf6; --muted:#9aa7bd;
+    --brand:#4ade80; --brand2:#22d3ee; --line:#1f2937; --warn:#fbbf24; --radius:16px;
+    --max:820px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:17px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+  a{color:var(--brand2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{line-height:1.25;letter-spacing:-.02em}
+  h1{font-size:clamp(27px,5vw,42px);font-weight:800;margin:.2em 0 .3em}
+  h2{font-size:clamp(20px,3vw,27px);font-weight:750;margin:1.8em 0 .4em}
+  h3{font-size:18px;font-weight:700;margin:1.4em 0 .3em}
+  p{color:#cdd6e6}
+  .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--brand);font-weight:700}
+  .grad{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero{padding:60px 0 24px;background:
+     radial-gradient(900px 420px at 80% -10%,rgba(34,211,238,.13),transparent 60%),
+     radial-gradient(700px 360px at 0% 0%,rgba(74,222,128,.12),transparent 55%)}
+  .lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted)}
+  .cta{display:inline-block;background:linear-gradient(90deg,var(--brand),var(--brand2));color:#04121a;
+    font-weight:800;padding:15px 28px;border-radius:999px;font-size:17px;margin:8px 0;border:0;cursor:pointer;
+    box-shadow:0 8px 30px rgba(34,211,238,.25);transition:transform .12s ease}
+  .cta:hover{transform:translateY(-2px);text-decoration:none}
+  .topnav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;padding:22px 0 0}
+  article{padding:18px 0 8px}
+  article strong{color:var(--ink)}
+  .callout{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--brand);
+    border-radius:10px;padding:16px 20px;margin:20px 0}
+  .build{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:24px 0}
+  ul.clean{list-style:none;padding:0;margin:8px 0}
+  ul.clean li{padding:8px 0 8px 28px;position:relative;color:#cdd6e6}
+  ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:12px;height:12px;border-radius:50%;
+    background:linear-gradient(90deg,var(--brand),var(--brand2))}
+  ol{color:#cdd6e6}
+  ol li{margin:8px 0}
+  pre{background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;
+    font:13.5px/1.6 ui-monospace,"JetBrains Mono",Consolas,monospace;color:#c7f0d4;margin:18px 0}
+  code{font-family:ui-monospace,"JetBrains Mono",Consolas,monospace}
+  p code,li code{background:#0f1726;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:14px;color:#9fe6b4}
+  .disclaimer{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--warn);
+    border-radius:10px;padding:14px 18px;color:var(--muted);font-size:14px;margin:20px 0}
+  .endcap{border-top:1px solid var(--line);margin-top:40px;padding:44px 0 16px;text-align:center}
+  footer{padding:34px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--line)}
+  .packlist{display:grid;grid-template-columns:1fr;gap:10px;margin:16px 0}
+  .packitem{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:15px}
+  .packitem b{color:var(--ink)}
+  .tag{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);
+    border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin-left:8px;vertical-align:middle}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="topnav">
+      <a href="./">← Course home</a>
+      <a href="start-here.html">Free Module 0</a>
+      <a href="curriculum.html">Curriculum</a>
+    </nav>
+    <p class="eyebrow" style="margin-top:30px">Free template · 1 of 5 from the Agent Workflow Pack</p>
+    <h1>Research fan-out <span class="grad">+ adversarial verify</span></h1>
+    <p class="lead">A single confident generation is how you get a plausible answer that's quietly wrong. This template is the fix: research every angle in parallel, then send a skeptic after each claim before it's allowed into the answer. Copy it. Run it.</p>
+  </div>
+</header>
+
+<article class="wrap">
+
+  <h2>The pattern</h2>
+  <p>Decompose a question into sub-queries, research each in parallel, then <strong>send a skeptic after every claim</strong> before it's allowed into the answer. The verify step is what separates this from a glorified search: one agent's plausible-but-wrong finding gets refuted by an independent agent whose only job is to refute it.</p>
+
+  <h2>Use it when</h2>
+  <p>You need an answer you can stand behind — a market read, a technical decision, a "is this actually true" check — and a single confident generation isn't enough.</p>
+
+  <h2>The runnable script</h2>
+  <p>This runs in an orchestration harness exposing <code>agent()</code>, <code>pipeline()</code>, and <code>parallel()</code> (the same shape the AI Money Machine course builds). Swap those for your framework's primitives and the logic carries over unchanged — the recipe below is framework-agnostic.</p>
+<pre><code>// Research a question with cited, adversarially-verified claims.
+const QUESTION = "What pricing model do successful solo-dev SaaS tools use in 2026?"
+
+const CLAIM_SCHEMA = { type: "object", properties: {
+  claims: { type: "array", items: { type: "object", properties: {
+    text: { type: "string" }, source: { type: "string" }
+  }, required: ["text", "source"] } }
+}, required: ["claims"] }
+
+const VERDICT_SCHEMA = { type: "object", properties: {
+  refuted: { type: "boolean" }, reason: { type: "string" }
+}, required: ["refuted", "reason"] }
+
+// 1. Fan out into angles (decompose once, then research each in parallel).
+const angles = [
+  "pricing tiers and price points",
+  "free trial vs freemium conversion",
+  "one-time vs subscription vs usage-based",
+]
+
+// 2. Pipeline: research each angle, then verify each claim it produced — no barrier,
+//    so angle A's claims verify while angle C is still being researched.
+const results = await pipeline(
+  angles,
+  angle =&gt; agent(
+    `Research "${QUESTION}" focused on: ${angle}. Return only claims you can attribute to a named source.`,
+    { schema: CLAIM_SCHEMA, label: `research:${angle}` }
+  ),
+  research =&gt; parallel(research.claims.map(c =&gt; () =&gt;
+    agent(
+      `Try to REFUTE this claim. Default to refuted=true if you cannot find independent support: "${c.text}" (source: ${c.source})`,
+      { schema: VERDICT_SCHEMA, label: "verify" }
+    ).then(v =&gt; ({ ...c, refuted: v.refuted, reason: v.reason }))
+  ))
+)
+
+const confirmed = results.flat().filter(Boolean).filter(c =&gt; !c.refuted)
+log(`${confirmed.length} claims survived verification`)
+return { question: QUESTION, confirmed }</code></pre>
+
+  <h2>Framework-agnostic recipe</h2>
+  <ol>
+    <li>Split the question into 3–5 non-overlapping research angles.</li>
+    <li>For each angle, ask an agent for <strong>claims with named sources only</strong> (no unsourced assertions).</li>
+    <li>For each claim, ask a <em>fresh</em> agent to refute it — prompt it to default to "refuted" when it can't find independent support.</li>
+    <li>Keep only claims that survive. Synthesize the answer from those.</li>
+  </ol>
+
+  <h2>Tuning notes</h2>
+  <ul class="clean">
+    <li><strong>Skeptics must default to refuted.</strong> A verifier prompted neutrally rubber-stamps; prompted to refute-unless-proven, it catches the hallucinations. This single framing is most of the value.</li>
+    <li><strong>One skeptic is usually enough.</strong> For high-stakes claims run 3 and require a majority to refute — cheap insurance against a bad verifier.</li>
+    <li><strong>Pipeline, don't barrier.</strong> There's no reason a fast angle's claims should wait for a slow angle to finish researching before they verify.</li>
+    <li>Scale angles to question breadth; scale skeptics-per-claim to stakes.</li>
+  </ul>
+
+  <div class="callout">
+    <p style="margin:0">This is exactly how the EAB trading committee vets a thesis before it reaches the human money-gate — a researcher proposes, a risk and a bear agent try to tear it down, and only what survives gets sized. The pattern is general: any time a wrong answer is expensive, verify before you commit.</p>
+  </div>
+
+  <h2>The other four patterns</h2>
+  <p>This is template 1 of 5 in the <strong>Agent Workflow Pack</strong>:</p>
+  <div class="packlist">
+    <div class="packitem"><b>01 · Research fan-out + adversarial verify</b> <span class="tag">free — above</span></div>
+    <div class="packitem"><b>02 · Judge panel</b> — N independent attempts, scored by parallel judges, synthesized from the winner.</div>
+    <div class="packitem"><b>03 · Loop-until-dry discovery</b> — keep spawning finders until K rounds surface nothing new.</div>
+    <div class="packitem"><b>04 · Content repurpose pipeline</b> — one source → many channel-shaped drafts, in parallel.</div>
+    <div class="packitem"><b>05 · Brand / competitor monitor</b> — multi-modal sweep + dedup + verify, on a schedule.</div>
+  </div>
+
+  <div class="disclaimer">This template is provided as-is for educational use. The market-pricing example is illustrative — verify any output before acting on it. Nothing here is financial advice.</div>
+
+</article>
+
+<section class="endcap">
+  <div class="wrap">
+    <p class="eyebrow">Want to build the machine that runs patterns like this?</p>
+    <h2 style="margin:.2em 0 .3em">The AI Money Machine</h2>
+    <p class="lead" style="max-width:600px;margin:0 auto 18px">A full course on building a self-running AI organization on your own PC — a paper-trading committee, a content engine, and a self-healing back-office — using exactly this kind of multi-agent orchestration with free local models.</p>
+    <p><a class="cta" href="https://egirald.gumroad.com/l/tvjadh">Get The AI Money Machine →</a></p>
+    <p style="font-size:13px;color:var(--muted)">$149 · lifetime access + all updates · 14-day guarantee &nbsp;·&nbsp; <a href="start-here.html">or read the free Module 0 first</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="yr">2026</span> The AI Money Machine. Educational product. Not financial advice.</p>
+  </div>
+</footer>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
