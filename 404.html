@@ -18,16 +18,23 @@
 <meta name="twitter:title" content="The AI Money Machine — page not found" />
 <meta name="twitter:description" content="That link is dead or the page moved. Recover from the 404." />
 <meta name="twitter:image" content="https://egiraldmu1795.github.io/ai-money-machine/og.png" />
+<!-- Google Fonts (typography fix) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0a0e14; --panel:#121826; --panel2:#0f1420; --ink:#e8edf6; --muted:#9aa7bd;
     --brand:#4ade80; --brand2:#22d3ee; --line:#1f2937; --warn:#fbbf24; --radius:16px;
     --max:780px;
   }
+  /* Fonts fix */
+  html,body,*{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  h1,h2,h3{font-family:'Space Grotesk',system-ui,-apple-system,sans-serif}
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--bg);color:var(--ink);
-    font:17px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font:17px/1.7 'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
   a{color:var(--brand2);text-decoration:none}
