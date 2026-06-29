@@ -28,14 +28,15 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<!-- Structured data: Course/Product (SEO + AI answer surfaces). Esteban: replace domain + price/availability at publish. -->
+<!-- Structured data: Course/Product (SEO + AI answer surfaces). -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Course",
   "name": "The AI Money Machine",
   "description": "A step-by-step course to build a self-running, local-first AI organization — a paper-trading hedge-fund committee, a content engine, and a self-healing back-office — on consumer hardware with free local models.",
-  "provider": { "@type": "Organization", "name": "The AI Money Machine" },
+  "provider": { "@type": "Organization", "name": "The AI Money Machine", "url": "https://egiraldmu1795.github.io/ai-money-machine/" },
+  "author": { "@type": "Person", "name": "Esteban Giraldo" },
   "offers": {
     "@type": "Offer",
     "category": "Educational",
@@ -131,7 +132,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 
 <section style="padding-top:34px">
   <div class="wrap" style="max-width:420px;text-align:center">
-    <video src="promo.mp4" controls muted loop autoplay playsinline preload="metadata"
+    <video src="promo.mp4" poster="og.png" controls muted loop autoplay playsinline preload="metadata"
            style="width:100%;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.35)"></video>
     <p class="muted" style="margin-top:12px;font-size:.92rem">60 seconds: a free AI tool on a home PC, turned into an actual money pipeline. <em>Educational, not financial advice.</em></p>
   </div>
