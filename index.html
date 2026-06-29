@@ -41,7 +41,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     "category": "Educational",
     "price": "149.00",
     "priceCurrency": "USD",
-    "availability": "https://schema.org/PreOrder",
+    "availability": "https://schema.org/InStock",
     "url": "https://egiraldmu1795.github.io/ai-money-machine/"
   },
   "hasCourseInstance": {
@@ -113,15 +113,13 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 </style>
 </head>
 <body>
-<!-- Esteban: this banner shows until payment is wired. Remove it once BUY_URL is set + you approve publish. -->
-<div class="banner" id="draftBanner">DRAFT / NOT LIVE — payment is not connected and nothing is for sale yet. See storefront/README.md.</div>
-
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Build a machine you own</div>
     <h1>I built an AI that runs my money and my businesses on a <span class="grad">$0/month home PC.</span><br/>Here's how to build your own.</h1>
     <p class="sub">A step-by-step build for a self-running AI organization: a paper-trading hedge-fund <em>committee</em> that deliberates, a content engine that feeds an audience, and a back-office that heals itself, all on consumer hardware with free local models. No $200/month API bills, no 200GB download, no code-wizardry required.</p>
-    <p><button class="cta" data-buy>Get The AI Money Machine →</button></p>
+    <p class="price-row" style="margin:18px 0 4px"><span class="price grad" style="font-size:34px">$149</span><span class="anchor">$299</span><span class="muted">lifetime access · 14-day money-back guarantee</span></p>
+    <p><button class="cta" data-buy data-tier="hero">Get The AI Money Machine →</button></p>
     <div>
       <span class="pill">Lifetime access</span>
       <span class="pill">Free / local model stack</span>
@@ -244,7 +242,7 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
       <span class="anchor">$299</span>
       <span class="muted">lifetime access + all updates</span>
     </div>
-    <p><button class="cta" data-buy>Build your AI Money Machine →</button></p>
+    <p><button class="cta" data-buy data-tier="pricing">Build your AI Money Machine →</button></p>
     <p class="muted" style="font-size:13px">Optional Starter Blueprint Pack +$39 at checkout.</p>
     <div class="disclaimer" style="max-width:760px;margin:22px auto 0">Educational only, not financial advice, no income guarantees. Trading involves risk of loss; the system is paper-first and going live is a manual decision made at your own risk.</div>
   </div>
@@ -273,8 +271,11 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 
   document.querySelectorAll("[data-buy]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      if (BUY_URL) { window.location.href = BUY_URL; }
-      else { alert("Payment isn't connected yet. (Set BUY_URL in index.html — see storefront/README.md.)"); }
+      if (!BUY_URL) { alert("Payment isn't connected yet. (Set BUY_URL in index.html — see storefront/README.md.)"); return; }
+      // utm tags so Gumroad's sales export attributes the placement (960; matches site/ + fast-mover-watch storefront)
+      var tier = btn.getAttribute("data-tier") || "cta";
+      var q = "utm_source=eab&utm_campaign=ai-money-machine&utm_content=" + encodeURIComponent(tier);
+      window.location.href = BUY_URL + (BUY_URL.indexOf("?") === -1 ? "?" : "&") + q;
     });
   });
 </script>
