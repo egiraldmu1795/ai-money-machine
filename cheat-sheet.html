@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Local-AI Stack Cheat Sheet — The AI Money Machine</title>
+<meta name="description" content="Which free local AI model to run for which job, on which hardware. The lean stack that costs $0/month in API bills." />
+<meta name="robots" content="noindex,follow" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBiMTIyMCIvPjxwb2x5bGluZSBwb2ludHM9IjUsMjMgMTMsMTUgMTksMTggMjcsNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjJjNTVlIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjI3IiBjeT0iNyIgcj0iMi42IiBmaWxsPSIjMjJjNTVlIi8+PC9zdmc+">
+<style>
+  :root{--bg:#0a0e14;--panel:#121826;--ink:#e8edf6;--muted:#9aa7bd;--brand:#4ade80;--brand2:#22d3ee;--line:#1f2937}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+  .hero{padding:56px 0 8px;text-align:center;background:radial-gradient(700px 360px at 50% -10%,rgba(34,211,238,.14),transparent 60%)}
+  .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--brand);font-weight:700}
+  h1{font-size:clamp(26px,5vw,40px);font-weight:800;letter-spacing:-.02em;margin:.25em 0}
+  h2{font-size:20px;margin:30px 0 10px;letter-spacing:-.01em}
+  .grad{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:17px;max-width:560px;margin:8px auto 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:22px 0}
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--brand);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  td code,code{background:#0f1420;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:13px;color:#cfe8ff}
+  .rule{background:#0f1420;border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:10px;padding:14px 18px;margin:14px 0;color:var(--ink)}
+  pre{background:#0f1420;border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow:auto;font-size:13px;color:#cfe8ff}
+  a{color:var(--brand2);text-decoration:none}
+  .cta{display:inline-block;background:linear-gradient(90deg,var(--brand),var(--brand2));color:#04121a;font-weight:800;padding:14px 26px;border-radius:999px;margin:6px 0}
+  .muted{color:var(--muted)}
+  .disclaimer{background:#0f1420;border:1px solid var(--line);border-left:3px solid #fbbf24;border-radius:10px;padding:13px 17px;color:var(--muted);font-size:13.5px;margin-top:18px}
+  footer{padding:34px 0;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Your free download</div>
+    <h1>The <span class="grad">Local-AI Stack</span> Cheat Sheet</h1>
+    <p class="sub">Which free local model to run for which job, on which hardware — the lean stack that costs <strong style="color:var(--ink)">$0/month</strong> in API bills. Bookmark this page.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card">
+    <h2 style="margin-top:6px">1 · The right model for the job</h2>
+    <table>
+      <tr><th>Job</th><th>Run this (free, local)</th><th>Why</th></tr>
+      <tr><td>Deep reasoning / planning</td><td><code>deepseek-r1:14b</code> · <code>qwen3:14b</code></td><td>Chain-of-thought without an API bill. The workhorse tier.</td></tr>
+      <tr><td>Drafting / summarizing / grunt</td><td><code>llama3.2:3b</code> · <code>qwen3:4b</code></td><td>Fast + cheap on VRAM. 80% of calls don't need a big brain.</td></tr>
+      <tr><td>Heavy reasoning (occasional)</td><td><code>qwen2.5:32b</code></td><td>Only when 14B isn't enough. Slow but local. Skip 70B unless you have 40GB+ VRAM.</td></tr>
+      <tr><td>Code</td><td><code>qwen2.5-coder:14b</code></td><td>Purpose-built for code edits and review.</td></tr>
+      <tr><td>Embeddings (memory/RAG)</td><td><code>all-MiniLM-L6-v2</code> (fastembed) · <code>nomic-embed-text</code></td><td>Tiny, fast, runs on CPU. This is your memory backbone.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:6px">2 · Rough VRAM / hardware guide</h2>
+    <table>
+      <tr><th>Model size</th><th>VRAM (Q4 quant)</th><th>Runs well on</th></tr>
+      <tr><td>3–4B</td><td>~3–4 GB</td><td>Any modern laptop / 8GB GPU / even CPU</td></tr>
+      <tr><td>7–8B</td><td>~6–8 GB</td><td>8–12GB GPU (RTX 3060/4060)</td></tr>
+      <tr><td>14B</td><td>~10–12 GB</td><td>12–16GB GPU (RTX 4070/4080)</td></tr>
+      <tr><td>32B</td><td>~20–24 GB</td><td>24GB GPU (RTX 3090/4090) — or slow on less</td></tr>
+      <tr><td>70B</td><td>~40 GB+</td><td>Multi-GPU / heavy quant. Usually not worth it locally.</td></tr>
+    </table>
+    <p class="muted" style="font-size:13.5px;margin:12px 0 0">Rule of thumb: a Q4-quantized model needs roughly <strong style="color:var(--ink)">(billions of params) × 0.6–0.8 GB</strong> of VRAM. Leave ~2GB headroom for context.</p>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:6px">3 · The one routing rule that saves you the most</h2>
+    <div class="rule"><strong>Premium tokens for reasoning. Free local models for grunt work.</strong><br/>
+      Route every call by difficulty: send the hard 20% (planning, judgment, final synthesis) to your best model, and the easy 80% (drafting, extracting, reformatting, classifying) to a free 3–4B local model. Most "$200/month AI bills" are 80% grunt work paying frontier prices.</div>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:6px">4 · Be running in 10 minutes</h2>
+    <pre># 1. Install Ollama (Win/Mac/Linux): https://ollama.com
+# 2. Pull the lean starter stack:
+ollama pull llama3.2:3b        # fast grunt-work model
+ollama pull qwen3:14b          # reasoning workhorse
+ollama pull nomic-embed-text   # embeddings for memory/RAG
+
+# 3. Test it (chat in your terminal):
+ollama run qwen3:14b "Summarize why local models beat API bills for grunt work."
+
+# 4. It's an OpenAI-compatible server on http://localhost:11434
+#    Point any tool/SDK at that base URL — no API key, $0/call.</pre>
+    <p class="muted" style="font-size:13.5px;margin:10px 0 0">That's the whole foundation: a router, a grunt model, a reasoning model, and an embedder. Everything else is built on top.</p>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <h2 style="margin-top:6px">Want the whole machine, not just the stack?</h2>
+    <p class="muted" style="max-width:520px;margin:6px auto 14px">This cheat sheet is Module 2 of <strong style="color:var(--ink)">The AI Money Machine</strong> — the full step-by-step build for a self-running AI organization (trading committee, content engine, self-healing back-office) on your own PC.</p>
+    <a class="cta" href="index.html">See The AI Money Machine →</a>
+    <p class="muted" style="font-size:13px;margin-top:10px"><a href="start-here.html">Read Module 0 free</a> · <a href="curriculum.html">Full curriculum</a></p>
+  </div>
+
+  <div class="disclaimer">Educational only. Not financial advice. No income guarantees. Model names and VRAM figures are approximate and change as new models ship — the routing principle is what lasts.</div>
+</main>
+<footer><div class="wrap">© <span id="yr">2026</span> The AI Money Machine. Educational. Not financial advice.</div></footer>
+<script>document.getElementById("yr").textContent=new Date().getFullYear();</script>
+</body>
+</html>
