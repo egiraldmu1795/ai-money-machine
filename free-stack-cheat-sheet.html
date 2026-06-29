@@ -43,7 +43,6 @@
 </style>
 </head>
 <body>
-<div class="banner" id="draftBanner">DRAFT / NOT LIVE — connect your email tool before collecting addresses. See README.md.</div>
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Free download</div>
@@ -61,7 +60,12 @@
       <li>Copy-paste install + model-pull commands to be running in 10 minutes</li>
     </ul>
     <!-- Esteban: point this form at your email tool (ConvertKit/MailerLite/Beehiiv/Gumroad email). -->
-    <form id="optin" action="" method="post">
+    <form id="optin" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="682e61e2-ae02-4481-8c6d-78d22adc4194">
+      <input type="hidden" name="subject" value="New lead: Local-AI Stack Cheat Sheet">
+      <input type="hidden" name="from_name" value="AI Money Machine">
+      <input type="hidden" name="redirect" value="https://egiraldmu1795.github.io/ai-money-machine/cheat-sheet.html">
+      <input type="text" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
       <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address" />
       <button type="submit">Send me the cheat sheet →</button>
     </form>
@@ -72,8 +76,8 @@
 <footer><div class="wrap">© <span id="yr">2026</span> The AI Money Machine. Educational. Not financial advice.</div></footer>
 <script>
   // Esteban: set FORM_ACTION to your email-tool form endpoint, then set DRAFT=false.
-  const FORM_ACTION = "";
-  const DRAFT = true;
+  const FORM_ACTION = "https://api.web3forms.com/submit";
+  const DRAFT = false;
   document.getElementById("yr").textContent = new Date().getFullYear();
   if (!DRAFT) { const b=document.getElementById("draftBanner"); if(b) b.remove(); }
   const f = document.getElementById("optin");
